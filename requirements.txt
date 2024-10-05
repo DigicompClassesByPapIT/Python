@@ -1,0 +1,2 @@
+CheckMyTex
+jupyter

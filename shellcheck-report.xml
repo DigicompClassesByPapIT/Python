@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<checkstyle version='4.3'>
+<file name='./compile&#45;latex.sh' >
+</file>
+<file name='./compress&#45;image.sh' >
+</file>
+<file name='./join&#45;using&#45;awk.sh' >
+</file>
+<file name='./ping&#45;sweeper.sh' >
+<error line='18' column='10' severity='info' message='Check exit code directly with e.g. &#39;if mycmd&#59;&#39;&#44; not indirectly with &#36;&#63;.' source='ShellCheck.SC2181' />
+</file>
+<file name='./analytic&#45;using&#45;awk.sh' >
+<error line='1' column='1' severity='error' message='Tips depend on target shell and yours is unknown. Add a shebang or a &#39;shell&#39; directive.' source='ShellCheck.SC2148' />
+</file>
+<file name='./fibo&#95;cached.sh' >
+<error line='17' column='11' severity='warning' message='Declare and assign separately to avoid masking return values.' source='ShellCheck.SC2155' />
+<error line='18' column='11' severity='warning' message='Declare and assign separately to avoid masking return values.' source='ShellCheck.SC2155' />
+</file>
+<file name='./sqlite&#45;hr.sh' >
+</file>
+<file name='./compress&#45;pdf.sh' >
+</file>
+<file name='./checkmytex.sh' >
+</file>
+<file name='./endless&#45;loop.sh' >
+</file>
+<file name='./venv/lib/python3.12/site&#45;packages/pexpect/bashrc.sh' >
+<error line='1' column='1' severity='error' message='Tips depend on target shell and yours is unknown. Add a shebang or a &#39;shell&#39; directive.' source='ShellCheck.SC2148' />
+<error line='3' column='10' severity='info' message='Not following&#58; /etc/bashrc was not specified as input &#40;see shellcheck &#45;x&#41;.' source='ShellCheck.SC1091' />
+<error line='6' column='10' severity='info' message='Not following&#58; /etc/bash.bashrc was not specified as input &#40;see shellcheck &#45;x&#41;.' source='ShellCheck.SC1091' />
+<error line='9' column='10' severity='warning' message='ShellCheck can&#39;t follow non&#45;constant source. Use a directive to specify location.' source='ShellCheck.SC1090' />
+</file>
+<file name='./venv/lib/python3.12/site&#45;packages/tqdm/completion.sh' >
+<error line='12' column='16' severity='warning' message='Prefer mapfile or read &#45;a to split command output &#40;or quote to avoid splitting&#41;.' source='ShellCheck.SC2207' />
+<error line='12' column='92' severity='info' message='Double quote to prevent globbing and word splitting.' source='ShellCheck.SC2086' />
+<error line='15' column='16' severity='warning' message='Prefer mapfile or read &#45;a to split command output &#40;or quote to avoid splitting&#41;.' source='ShellCheck.SC2207' />
+<error line='15' column='391' severity='info' message='Double quote to prevent globbing and word splitting.' source='ShellCheck.SC2086' />
+</file>
+<file name='./venv/lib/python3.12/site&#45;packages/debugpy/&#95;vendored/pydevd/pydevd&#95;attach&#95;to&#95;process/linux&#95;and&#95;mac/compile&#95;linux.sh' >
+<error line='1' column='1' severity='error' message='Tips depend on target shell and yours is unknown. Add a shebang or a &#39;shell&#39; directive.' source='ShellCheck.SC2148' />
+<error line='11' column='44' severity='info' message='Double quote to prevent globbing and word splitting.' source='ShellCheck.SC2086' />
+<error line='11' column='77' severity='info' message='Double quote to prevent globbing and word splitting.' source='ShellCheck.SC2086' />
+</file>
+<file name='./venv/lib/python3.12/site&#45;packages/debugpy/&#95;vendored/pydevd/pydevd&#95;attach&#95;to&#95;process/linux&#95;and&#95;mac/compile&#95;mac.sh' >
+<error line='1' column='1' severity='error' message='Tips depend on target shell and yours is unknown. Add a shebang or a &#39;shell&#39; directive.' source='ShellCheck.SC2148' />
+<error line='3' column='51' severity='info' message='Double quote to prevent globbing and word splitting.' source='ShellCheck.SC2086' />
+<error line='3' column='84' severity='info' message='Double quote to prevent globbing and word splitting.' source='ShellCheck.SC2086' />
+<error line='4' column='48' severity='info' message='Double quote to prevent globbing and word splitting.' source='ShellCheck.SC2086' />
+<error line='4' column='72' severity='info' message='Double quote to prevent globbing and word splitting.' source='ShellCheck.SC2086' />
+</file>
+<file name='./venv/lib/python3.12/site&#45;packages/bleach/&#95;vendor/vendor&#95;install.sh' >
+</file>
+</checkstyle>
