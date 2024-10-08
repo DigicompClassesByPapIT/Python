@@ -556,20 +556,128 @@ total 8
     \end{frame}
 
 
+    \section{Les mots clé}\label{sec:keyword}
+
+    \begin{frame}[fragile]{Les mots clé Python\footnote{Python Keywords, \url{https://docs.python.org/3/reference/lexical_analysis.html\#keywords}}}
+        Python a ces mots clé~:
+        \begin{verbatim}
+False      await      else       import     pass
+None       break      except     in         raise
+True       class      finally    is         return
+and        continue   for        lambda     try
+as         def        from       nonlocal   while
+assert     del        global     not        with
+async      elif       if         or         yield
+        \end{verbatim}
+        Nous les connaîtrons tous (ou quasi) à la fin de cette session~!
+    \end{frame}
+
+
     \section{Premiers pas}\label{sec:first-steps}
     \begin{frame}{Premiers pas}{Mes premières variables et algorithme}
-        Ouvrir dans Pycharm le notebook \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/1_premiers_pas.ipynb}.
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/1_premiers_pas.ipynb}.
         \bigbreak
         Ce dernier expose des concepts de base comme~:
         \begin{itemize}
             \item Les variables
             \item Les opérateurs arithmétiques
-            \item Les opérations logiques
             \item Les commentaires
             \item Les types de base
         \end{itemize}
     \end{frame}
 
+    \section{Bases de la programmation}\label{sec:programming-basics}
+
+    \begin{frame}{Bases de la programmation}{Plus d'opérateurs et branchements}
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/2_base_programmation.ipynb}.
+        \bigbreak
+        Ce dernier expose des concepts de base comme~:
+        \begin{itemize}
+            \item Les opérateurs logiques
+            \item Les opérations de comparaison
+            \item Les opérateurs binaires
+            \item Les opérateurs d'identité
+            \item Opérateurs d'appartenance
+            \item Opérateurs d'affectation
+            \item Branchements A.K.A, le branching, une partie du control flow
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Bases de la programmation}{Les boucles}
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/3_boucles_iteratives.ipynb}.
+        \bigbreak
+        Ce dernier expose des concepts liés aux boucles~:
+        \begin{itemize}
+            \item Boucle \lstinline{while} liée à une condition d'arrêt
+            \item Boucle \lstinline{for}
+            \item Les instructions \lstinline{break} et \lstinline{continue}
+            \item Le \lstinline{else} dans une boucle
+            \item Les fonctions \lstinline{range} et \lstinline{enumerate}
+            \item Les fonctions \lstinline{sort} et \lstinline{sorted}
+            \item L'instruction \lstinline{map}
+            \item Les compréhensions de listes
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Bases de la programmation}{Les erreurs et exceptions}
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/4_erreurs_exceptions.ipynb}.
+        \bigbreak
+        Ce dernier expose des concepts liés aux erreurs et exceptions~:
+        \begin{itemize}
+            \item Les erreurs qu'on ne peut pas \textit{catch}
+            \item Les exceptions built-in
+            \item Les instructions \lstinline{try} et \lstinline{except}
+            \item Créer ses propres exceptions
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Bases de la programmation}{Les erreurs et exceptions}
+        Un programme ne doit pas directement crasher à cause d'une exception levée.
+        Les librairies et API doivent lever des exceptions pour signaler des erreurs au couches supérieur du programme que le GUI ou la CLI.
+        \bigbreak
+        \centering
+        \includegraphics[width=11cm]{image/exception}
+    \end{frame}
+
+    \begin{frame}{Bases de la programmation}{Les fonctions}
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/5_fonctions.ipynb}.
+        \bigbreak
+        Ce dernier expose des concepts suivants~:
+        \begin{itemize}
+            \item Déclarations d'une fonction
+            \item Retour de valeurs
+            \item Fonction lambda
+            \item Les \textit{partials}
+            \item Décorateurs
+        \end{itemize}
+    \end{frame}
+
+    \section{Types de données}\label{sec:data-types}
+
+    \begin{frame}{Types de données}{Les itérables}
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/6_types_iterables.ipynb}.
+        \bigbreak
+        Ce dernier détail les types built-in itérables uniquement~:
+        \begin{itemize}
+            \item Les chaînes de caractères, \lstinline{str}
+            \item Les listes, \lstinline{list}
+            \item Les tuples, \lstinline{tuple}
+            \item Les dictionnaires, \lstinline{dict}
+            \item Les ensembles, \lstinline{set}
+        \end{itemize}
+        Il existe d'autres types pouvant contenir des collections comme les \lstinline{Queue}, les \lstinline{namedtuple}, les \lstinline{array} par exemple.
+    \end{frame}
+
+    \begin{frame}{Types de données}{Les nombres}
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/7_types_numeriques.ipynb}.
+        \bigbreak
+        Ce dernier détail 2 types numériques built-in, les principaux~:
+        \begin{itemize}
+            \item Les entiers, \textit{integer} en anglais, \lstinline{int}
+            \item Les flottants, \textit{float} en anglais, \lstinline{float}
+        \end{itemize}
+        Il existe d'autres types pour travailler avec les nombres réels comme par exemple avec le module \lstinline{decimal} de la librairie standard.
+    \end{frame}
 
     \section{Licence CC}\label{sec:licence}
 
