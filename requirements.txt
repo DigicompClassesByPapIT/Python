@@ -1,2 +1,3 @@
 CheckMyTex
 jupyter
+requests

@@ -29,11 +29,11 @@
     \section{Table des matières}\label{sec:toc}
 
     \begin{frame}{Table des matières}
-        \begin{tiny}
+        \begin{small}
             \begin{multicols}{2}
                 \tableofcontents
             \end{multicols}
-        \end{tiny}
+        \end{small}
     \end{frame}
 
 
@@ -586,6 +586,7 @@ async      elif       if         or         yield
         \end{itemize}
     \end{frame}
 
+
     \section{Bases de la programmation}\label{sec:programming-basics}
 
     \begin{frame}{Bases de la programmation}{Plus d'opérateurs et branchements}
@@ -652,6 +653,7 @@ async      elif       if         or         yield
         \end{itemize}
     \end{frame}
 
+
     \section{Types de données}\label{sec:data-types}
 
     \begin{frame}{Types de données}{Les itérables}
@@ -675,9 +677,715 @@ async      elif       if         or         yield
         \begin{itemize}
             \item Les entiers, \textit{integer} en anglais, \lstinline{int}
             \item Les flottants, \textit{float} en anglais, \lstinline{float}
+            \item Les booléens, \textit{boolean} en anglais, \lstinline{bool}
         \end{itemize}
-        Il existe d'autres types pour travailler avec les nombres réels comme par exemple avec le module \lstinline{decimal} de la librairie standard.
+        Il existe d'autres types pour travailler avec les nombres réels, comme par exemple avec le module \lstinline{decimal} de la librairie standard.
+        Attention aux flottants, ils mènent à de sérieux bugs \url{https://www-users.cse.umn.edu/~arnold/disasters/Patriot-dharan-skeel-siam.pdf}.
     \end{frame}
+
+
+    \section{Programmation avancée}\label{sec:advanced-programming}
+
+    \subsection{Flux standard}\label{subsec:standard-flux}
+
+    \begin{frame}{Programmation avancée}{Sortie et mise en forme}
+        \centering
+        \includegraphics[width=11cm]{image/outputs}
+        \bigbreak
+        Ci-dessus les différentes sorties de données possibles.
+        Nous ne traiterons que celles dans le terminal et les fichiers.
+    \end{frame}
+
+    \begin{frame}{Programmation avancée}{Rappel sur les flux standards\footnote{\label{standard-stream}The Standard Streams, \url{https://zedas.fr/posts/linux-explained-6-standard-streams/}}}
+        \begin{itemize}
+            \item \textbf{Les flux standards}~: Canaux de communication d'entrée et de sortie dans le shell.
+            \item \textbf{entrée standard (Entrée standard)}~:
+            \begin{itemize}
+                \item Flux pour les données d'entrée d'un programme.
+                \item Exemple~: Taper la commande \lstinline{echo "Coucou" | at now}, elle utilise l'entrée standard de la commande \lstinline{at}.
+            \end{itemize}
+            \item \textbf{sortie standard (Sortie standard)~:}
+            \begin{itemize}
+                \item Flux pour les données de sortie d'un programme.
+                \item Exemple~: La sortie de \lstinline{ls} est affichée via sortie standard.
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Programmation avancée}{Rappel sur les flux standards\cref{standard-stream}}
+        \begin{itemize}
+            \item \textbf{sortie d'erreur (Erreur standard)}~:
+            \begin{itemize}
+                \item Flux pour les messages d'erreur ou diagnostics.
+                \item Exemple~: L'erreur \lstinline{No such file or directory} de \lstinline{ls} est affichée via la sortie d'erreur.
+            \end{itemize}
+            \item \textbf{Identifiants des flux~:}
+            \begin{itemize}
+                \item \textbf{0~:} entrée standard (stdin)
+                \item \textbf{1~:} sortie standard (stdout)
+                \item \textbf{2~:} sortie d'erreur (stderr)
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Programmation avancée}{Rappel sur les flux standards\cref{standard-stream}}
+        \centering
+        \includegraphics[width=10cm]{image/standard-stream-computer}
+    \end{frame}
+
+    \begin{frame}{Programmation avancée}{Rappel sur les flux standards\cref{standard-stream}}
+        \centering
+        \includegraphics[width=10cm]{image/shell-stream-no-redirect}
+    \end{frame}
+
+    \begin{frame}[fragile]{Programmation avancée}{Gestion des input et output en Python}
+        Ouvrir dans PyCharm le script téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/std_in_sum.py}.
+        \begin{dangercolorbox}
+            On travaille avec un script et non plus un notebook, car ces derniers ne prête pas à la gestion des flux standards et d'un CLI
+        \end{dangercolorbox}
+        Ce dernier met en avant l'usage de l'entrée standard rendu possible grâce au module \lstinline{sys} de la librairie standard.
+        \begin{lstlisting}[language=bash]
+$ echo "54542 5255 5" | python3 std_in_sum.py
+59802
+$ python3 std_in_sum.py <<EOF
+> 54542 5255 5
+> 54542 5255 5
+> EOF
+119604
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Programmation avancée}{Gestion des input et output en Python}
+        La sortie standard et l'erreur standard sont gérée pas la fonction built-in \lstinline{print} à laquelle on peut passer un argument \lstinline{file} un objet fichier vers lequel la sortie sera redirigée.
+        \begin{lstlisting}[language=Python,basicstyle=\tiny\ttfamily]
+from sys import stdin, stdout, stderr
+
+
+def read_lines():
+    return stdin.read().splitlines()
+
+
+def main():
+    ...
+    # Result redirected to the standard output
+    print(sum(integers), file=stdout)
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception as e:
+        print(e, file=stderr) # Error redirected to the standard error
+        exit(1)
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Programmation avancée}{Gestion des input et output en Python}
+        La précédente version est strictement équivalente à utiliser les objets \lstinline{sys.stdout} et \lstinline{sys.stderr} et leur méthode \lstinline{write}~:
+        \begin{lstlisting}[language=Python,basicstyle=\tiny\ttfamily]
+from sys import stdin, stdout, stderr
+
+
+def read_lines() -> list:
+    """
+    Read lines from the standard input
+
+       :return: list of lines read from the standard input.
+    """
+    return stdin.read().splitlines()
+
+
+def main() -> None:
+...
+    stdout.write(str(sum(integers)) + "\n")
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception as e:
+        # print(e, file=stderr)
+        stderr.write(e)
+        exit(1)
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Programmation avancée}{Gestion des input et output en Python}
+        Vérification de la gestion des erreurs et du code retour.
+        \begin{lstlisting}[language=Bash,basicstyle=\tiny\ttfamily]
+$ echo "54542 5255 5" | python3 std_in_sum.py
+59802
+$ echo "54542 5255 d" | python3 std_in_sum.py
+Traceback (most recent call last):
+  File "/home/chrichri/Documents/Digicomp/Python/std_in_sum.py", line 53, in <module>
+    main()
+  File "/home/chrichri/Documents/Digicomp/Python/std_in_sum.py", line 46, in main
+    integers = cast_to_integers(literals)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/chrichri/Documents/Digicomp/Python/std_in_sum.py", line 37, in cast_to_integers
+    return [sum([int(l) for l in literal]) for literal in literals]
+                 ^^^^^^
+ValueError: invalid literal for int() with base 10: 'd'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chrichri/Documents/Digicomp/Python/std_in_sum.py", line 56, in <module>
+    stderr.write(e)
+TypeError: write() argument must be str, not ValueError
+$ echo "Last RC is $?"
+Last RC is 1
+$ echo "54542 5255 d" | python3 std_in_sum.py 2> /dev/null
+$
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}{Programmation avancée}{Gestion des input et output en Python}
+        Exercice \execcounterdispinc{}, développer le script Python suivant~:
+        \begin{itemize}
+            \item Créer un script Python nommé \lstinline{all_primes.py}.
+            \item Il ne prend aucune donnée en entrée.
+            \item Il affiche un nombre premier qui commence par les chiffres tapés sur la pavé numérique.
+            \item Tester le script avec des valeurs correctes et aberrantes.
+        \end{itemize}
+    \end{frame}
+
+    \subsection{CLI}\label{subsec:cli}
+
+    \begin{frame}{Programmation avancée}{Les paramètres de la ligne de commande}
+        Pour passer des valuer, i.e., des arguments à un programme, il existe de multiples méthodes~:
+        \begin{itemize}
+            \item Entre autre la standard input comme vu précédemment.
+            \item La librairie standard \href{https://docs.python.org/3/library/argparse.html}{\lstinline{argparse}} qui permet de définir des arguments, des valeurs par défaut, des options, un \textit{help}, \textit{etc}.
+            Cette librairie est très complète et à privilégier.
+            \item La librairie standard \href{https://docs.python.org/3/library/sys.html\#sys.argv}{\lstinline{sys.argv}} qui permet de récupérer les arguments passés à un programme.
+            Trop bas niveau, elle demande beaucoup de travaille de développement et est à éviter.
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}[fragile]{Programmation avancée}{Les paramètres de la ligne de commande}
+        \begin{footnotesize}
+            Ouvrir dans PyCharm le script téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/std_in_sum_cli.py}.
+            Il est identique à \lstinline{std_in_sum.py} sauf qu'on utilise \lstinline{argparse} et on peut passer entré un fichier ou la standard in.
+            Il est également possible grâce à cette librairie de spécifié un fichier de sortie ou la standard out par défaut.
+        \end{footnotesize}
+        \begin{lstlisting}[language=Python,basicstyle=\tiny\ttfamily]
+    parser = argparse.ArgumentParser(
+        description="Sum integers from an input file"
+        # file argument or stdin
+
+    )
+    parser.add_argument(
+        'input',
+        nargs='?',
+        type=argparse.FileType('r'),
+        default=stdin,
+        help="File with integers separated by space"
+    )
+    parser.add_argument(
+        'output',
+        nargs='?',
+        type=argparse.FileType('w'),
+        default=stdout,
+        help="File with the sum of the integers"
+    )
+    args = parser.parse_args()
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Programmation avancée}{Les paramètres de la ligne de commande}
+        Expliquer cela~:
+        \begin{lstlisting}[language=Bash]
+$ python3 std_in_sum_cli.py -h
+usage: std_in_sum_cli.py [-h] [input] [output]
+
+Sum integers from an input file
+
+positional arguments:
+  input       File with integers separated by space, default is stdin
+  output      File with the sum of the integers, default is stdout
+
+options:
+  -h, --help  show this help message and exit
+$ echo "54542 5255 88" | python3 std_in_sum_cli.py
+59885
+$ echo "54542 5255 88" > ints.txt
+$ python3 std_in_sum_cli.py ints.txt
+59885
+$ python3 std_in_sum_cli.py ints.txt sum.txt
+$ cat sum.txt
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}{Programmation avancée}{Les paramètres de la ligne de commande}
+        Exercice \execcounterdispinc{}, développer le script Python suivant~:
+        \begin{itemize}
+            \item Créer un script Python nommé \lstinline{all_primes_cli.py}.
+            \item Il a les mêmes éxigences que \lstinline{all_primes.py}.
+            \item Mais en plus doit pouvoir~:
+            \begin{itemize}
+                \item Prendre un argument \lstinline{--start} pour spécifier le début de la recherche.
+                \item Prendre un argument \lstinline{--out} pour spécifier un fichier de standard, par défaut c'est standard output.
+            \end{itemize}
+            \item Tester le script avec des valeurs correctes et aberrantes.
+        \end{itemize}
+    \end{frame}
+
+    \subsection{CLI}\label{subsec:cli}
+
+    \begin{frame}{Programmation avancée}{Packaging}
+        Comme vu précédemment il existe de nombreuses sources distantes de packaging.
+        Ce sont là d'où viennent nos dépendances logicielles.
+        \bigbreak
+        Mais il est fort utile de savoir \textit{builder} ses propres packages pour les distribuer dans l'entreprise ou sur le web.
+
+        Les utilitaires les plus utilisés à cette fin sont~:
+        \bigbreak
+        \centering
+        \includegraphics[width=5.5cm]{image/survey_packaging_lib}
+    \end{frame}
+
+    \begin{frame}[fragile]{Programmation avancée}{Packaging}
+        Avec setuptools, la création d'un package et son installation se font en une seule ligne de commande avec \lstinline{pip}.
+        \bigbreak
+        La configuration du package se fait dans un fichier \lstinline{setup.py}~:
+        \begin{lstlisting}[language=Python]
+"""
+Package the project for distribution.
+The only scripts are the std_in_sum.py and std_in_sum_cli.py
+A cli executable is created for the std_in_sum_cli
+"""
+from setuptools import setup
+
+setup(
+    name="std_in_sum",
+    version="0.1",
+    py_modules=["std_in_sum", "std_in_sum_cli"],  # Le code python
+    author="Christophe",
+    entry_points={"console_scripts": [
+        "std_in_sum = std_in_sum_cli:main",  # Une CLI façe à sa fonction main
+    ]},
+    install_requires=[],  # dépendances aux packages distants
+)
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Programmation avancée}{Packaging}
+        Les principales fonctions de ce \lstinline{setup.py}~:
+        \begin{itemize}
+            \item Install le package et ses dépendances avec la commande~:
+            \begin{lstlisting}[language=bash,basicstyle=\tiny\ttfamily]
+$ pip install .
+            \end{lstlisting}
+            \item Build le package au format wheel pour distribution~:
+            \begin{lstlisting}[language=bash,basicstyle=\tiny\ttfamily]
+$ pip wheel --no-deps -w dist .
+            \end{lstlisting}
+            \item A installé une CLI des scripts du package~:
+            \begin{lstlisting}[language=Bash,basicstyle=\tiny\ttfamily]
+$ std_in_sum -h
+usage: std_in_sum [-h] [input] [output]
+
+Sum integers from an input file
+
+positional arguments:
+input       File with integers separated by space, default is stdin
+output      File with the sum of the integers, default is stdout
+
+options:
+-h, --help  show this help message and exit
+$ which std_in_sum
+/home/chrichri/Documents/Campus-St-Michel-IT/intro-dev-web/venv/bin/std_in_sum
+            \end{lstlisting}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}[fragile]{Programmation avancée}{Packaging}
+        La wheel est \textit{buildée} dans le répertoire \lstinline{dist}~:
+        \begin{lstlisting}[language=bash]
+$ ll dist/*whl
+-rw-rw-r-- 1 chrichri chrichri 6142 oct.   9 16:10 dist/std_in_sum-0.1-py3-none-any.whl
+        \end{lstlisting}
+        \bigbreak
+        Elle peut être installée avec \lstinline{pip} par tout utilisateur en sa possession~:
+        \begin{lstlisting}[language=bash]
+$ pip install dist/std_in_sum-0.1-py3-none-any.whl -U
+Processing ./dist/std_in_sum-0.1-py3-none-any.whl
+std-in-sum is already installed with the same version as the provided wheel. Use --force-reinstall to force an installation of the wheel.
+
+[notice] A new release of pip is available: 23.2.1 -> 24.2
+[notice] To update, run: pip install --upgrade pip
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}{Programmation avancée}{Packaging}
+        \begin{columns}
+            \column{0.7\textwidth}
+            Exercice \execcounterdispinc{}, packager le script \lstinline{all_primes_cli.py} en un package Python avec Setuptools.
+
+            Tester l'installation du package avec \lstinline{pip} et l'exécution de la CLI.
+            \bigbreak
+            Exercice \execcounterdispinc{}, modifier le script \lstinline{all_primes_cli.py} pour que le display du résultat dans le terminal soit colorisé.
+            Pour cela, il faut utiliser un package distant comme \href{https://pypi.org/project/termcolor/}{\lstinline{termcolor}} par exemple.
+
+            Modifier la configuration pour la dépendance choisie soit ajouter automatiquement pendant l'installation.
+
+            Tester l'installation du package avec \lstinline{pip} et l'exécution de la CLI.
+            \column{0.3\textwidth}
+            \begin{center}
+                \includegraphics[width=4cm]{image/python-luggage}
+            \end{center}
+        \end{columns}
+    \end{frame}
+
+    \subsection{Quelques modules de la Standard Library}\label{subsec:std-modules}
+
+    \begin{frame}{Quelques modules de la Standard Library}{La Standard Library}
+        \begin{tiny}
+            La standard library Python couvre (quasi) tous les besoins d'un développeur.
+            Des librairies distantes dédiées peuvent être plus performance ou plus faciles à prendre en main, d'où l'existence des frameworks web.
+            Mais si on s'en donne les moyens on peut tout faire avec la standard library.
+            \bigbreak
+            Selon son site elle couvre~:
+
+            \begin{itemize}
+                \item \href{https://docs.python.org/3/library/functions.html}{Built-in Functions}
+                \item \href{https://docs.python.org/3/library/constants.html}{Built-in Constants}
+                \item \href{https://docs.python.org/3/library/stdtypes.html}{Built-in Types}
+                \item \href{https://docs.python.org/3/library/exceptions.html}{Built-in Exceptions}
+                \item \href{https://docs.python.org/3/library/text.html}{Text Processing Services}
+                \item \href{https://docs.python.org/3/library/binary.html}{Binary Data Services}
+                \item \href{https://docs.python.org/3/library/datatypes.html}{Data Types}
+                \item \href{https://docs.python.org/3/library/numeric.html}{Numeric and Mathematical Modules}
+                \item \href{https://docs.python.org/3/library/functional.html}{Functional Programming Modules}
+                \item \href{https://docs.python.org/3/library/filesys.html}{File and Directory Access}
+                \item \href{https://docs.python.org/3/library/persistence.html}{Data Persistence}
+                \item \href{https://docs.python.org/3/library/archiving.html}{Data Compression and Archiving}
+                \item \href{https://docs.python.org/3/library/fileformats.html}{File Formats}
+                \item \href{https://docs.python.org/3/library/crypto.html}{Cryptographic Services}
+                \item \href{https://docs.python.org/3/library/allos.html}{Generic Operating System Services}
+                \item \href{https://docs.python.org/3/library/concurrency.html}{Concurrent Execution}
+                \item \href{https://docs.python.org/3/library/ipc.html}{Networking and Interprocess Communication}
+                \item \href{https://docs.python.org/3/library/netdata.html}{Internet Data Handling}
+                \item \href{https://docs.python.org/3/library/markup.html}{Structured Markup Processing Tools}
+                \item \href{https://docs.python.org/3/library/internet.html}{Internet Protocols and Support}
+                \item \href{https://docs.python.org/3/library/mm.html}{Multimedia Services}
+                \item \href{https://docs.python.org/3/library/i18n.html}{Internationalization}
+                \item \href{https://docs.python.org/3/library/frameworks.html}{Program Frameworks}
+                \item \href{https://docs.python.org/3/library/tk.html}{Graphical User Interfaces with Tk}
+                \item \href{https://docs.python.org/3/library/development.html}{Development Tools}
+                \item \href{https://docs.python.org/3/library/debug.html}{Debugging and Profiling}
+            \end{itemize}
+        \end{tiny}
+    \end{frame}
+
+    \begin{frame}{Quelques modules de la Standard Library}{La Standard Library}
+        \begin{itemize}
+            \item \href{https://docs.python.org/3/library/distribution.html}{Software Packaging and Distribution}
+            \item \href{https://docs.python.org/3/library/python.html}{Python Runtime Services}
+            \item \href{https://docs.python.org/3/library/custominterp.html}{Custom Python Interpreters}
+            \item \href{https://docs.python.org/3/library/modules.html}{Importing Modules}
+            \item \href{https://docs.python.org/3/library/language.html}{Python Language Services}
+            \item \href{https://docs.python.org/3/library/windows.html}{MS Windows Specific Services}
+            \item \href{https://docs.python.org/3/library/unix.html}{Unix Specific Services}
+            \item \href{https://docs.python.org/3/library/cmdline.html}{Modules command-line interface (CLI)}
+            \item \href{https://docs.python.org/3/library/superseded.html}{Superseded Modules}
+            \item \href{https://docs.python.org/3/library/security_warnings.html}{Security Considerations}
+        \end{itemize}
+        \bigbreak
+        Bref il y a de quoi faire\ldots
+    \end{frame}
+
+    \begin{frame}{Quelques modules de la Standard Library}{\href{datetime}{https://docs.python.org/3/library/datetime.html}}
+        Le module \lstinline{datetime} fournit des classes pour manipuler les dates et les heures.
+
+        Bien que l'arithmétique des dates et des heures soit prise en charge, l'accent de l'implémentation est mis sur l'extraction efficace des attributs pour le formatage et la manipulation des sorties.
+        \bigbreak
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/8_datetime.ipynb}.
+
+        Il détail~:
+        \begin{itemize}
+            \item L'objet \lstinline{datetime}
+            \item La création d'un objet \lstinline{datetime} à partir d'une chaîne de caractères
+            \item La création d'une chaîne de caractères à partir d'un objet \lstinline{datetime}
+            \item La manipulation des durées avec \lstinline{timedelta} et les opérateurs arithmétiques
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Quelques modules de la Standard Library}{\href{datetime}{https://docs.python.org/3/library/datetime.html}}
+        Exercice \execcounterdispinc, écrire les scripts suivants{}~:
+        \begin{enumerate}
+            \item \lstinline{next_bd.py}~: Écrivez un programme qui prend une date de naissance en entrée et affiche l'âge de l'utilisateur ainsi que le nombre de jours, heures, minutes et secondes jusqu'à son prochain anniversaire.
+            \item \lstinline{double_day.py}~: Pour deux personnes nées à des jours différents, il y a un jour où l'une est deux fois plus âgée que l'autre. C'est leur \textit{Double Day}.
+            Écrivez un programme qui prend deux dates de naissance et calcule leur \textit{Double Day}.
+            \item \lstinline{n_day.py}~: Pour un peu plus de défi, écrivez la version plus générale qui calcule le jour où une personne est $n$ fois plus âgée que l'autre.
+        \end{enumerate}
+    \end{frame}
+
+    \subsection{Quelques modules de la Standard Library}\label{subsec:std-modules}
+
+    \begin{frame}{Quelques modules de la Standard Library}{La concurrence}
+        Il existe plusieurs libraires permettant une exécution concurrente du code dans la standard library Python.
+        \begin{itemize}
+            \item \href{https://docs.python.org/3/library/threading.html}{threading - Thread-based parallelism}
+            \item \href{https://docs.python.org/3/library/multiprocessing.html}{multiprocessing - Process-based parallelism}
+            \item \href{https://docs.python.org/3/library/multiprocessing.shared_memory.html}{multiprocessing.shared\_memory - Shared memory for direct access across processes}
+            \item \href{https://docs.python.org/3/library/concurrent.html}{The concurrent package}
+            \item \href{https://docs.python.org/3/library/concurrent.futures.html}{concurrent.futures - Launching parallel tasks}
+            \item \href{https://docs.python.org/3/library/subprocess.html}{subprocess - Subprocess management}
+            \item \href{https://docs.python.org/3/library/sched.html}{sched - Event scheduler}
+            \item \href{https://docs.python.org/3/library/queue.html}{queue - A synchronized queue class}
+            \item \href{https://docs.python.org/3/library/contextvars.html}{contextvars - Context Variables}
+            \item \href{https://docs.python.org/3/library/\_thread.html}{\_thread - Low-level threading API}
+            \item \href{https://docs.python.org/3/library/asyncio.html}{Asynchronous I/O}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Quelques modules de la Standard Library}{La concurrence}
+        Python n'est pas réputé pour sa rapidité.
+        En réalité, c'est son implémentation CPython qui ne l'ai pas.
+        \bigbreak
+        Pourquoi~?
+        \pause
+        \begin{itemize}
+            \item Interprété
+            \item GIL
+            \item Typage dynamique
+        \end{itemize}
+        Le GIL \textit{Global Interpreter Lock} est un verrou qui empêche l'exécution de plusieurs threads du CPU, A.K.A. cœurs, en même temps.
+        Il est très limitant.
+        Beaucoup d'autres langages n'ont pas ce verrou et ont depuis des années des JIT compiler comme PHP et JS.
+        Ils apparaissent plus rapides.
+    \end{frame}
+
+    \begin{frame}{Quelques modules de la Standard Library}{La concurrence}
+        Chaque librairie a ses avantages et inconvénients.
+        La principale différence est que l'exécution est soit dans le même process, soit exécuté dans un nouveau process.
+        \bigbreak
+        Si c'est dans le même process on parle de threading, dans un autre process on parle de multiprocessing.
+        \bigbreak
+        Si on peut exécuter du code dans plusieurs, le GIL devient moins limitant en terme de performance~!
+        \begin{dangercolorbox}
+            Attention on parle parfois de thread pour les coeurs des CPU. Mais si on en utilise un de plus c'est du multiprocessing.
+            Il faut différencier thread physique et thread logiciel.
+        \end{dangercolorbox}
+    \end{frame}
+
+    \begin{frame}{Quelques modules de la Standard Library}{Threading VS Multiprocessing}
+        \centering
+        \includegraphics[width=11cm]{image/threading-vs-multiprocessing} \\ Les différences\footnote{Threading vs Multiprocessing in Python, \url{https://superfastpython.com/threading-vs-multiprocessing-in-python/}} \\
+    \end{frame}
+
+    \begin{frame}[fragile]{Quelques modules de la Standard Library}{Threading VS Multiprocessing}
+        Il y a des différences d'exécution mais l'API est la même dans les librairies \lstinline{threading} et \lstinline{multiprocessing}.
+        \begin{lstlisting}[language=Python]
+import multiprocessing
+import threading
+import time
+# Fonction à exécuter en parallèle
+def worker(message):
+    """Worker function"""
+    time.sleep(5)
+    print('Worker:', message)
+# Create the thread calling the worker function with an argument
+thread = threading.Thread(target=worker, args=("Je suis un thread",))
+thread.start() # Start the thread
+thread.join() # Wait for the thread to finish
+# Create the process calling the worker function with an argument
+process = multiprocessing.Process(target=worker, args=("Je suis un process",))
+process.start() # Start the process
+process.join() # Wait for the process to finish
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Quelques modules de la Standard Library}{Threading VS Multiprocessing}
+        Il peut être pratique de créer un objet et d'utiliser l'héritage pour ses libraires~:
+        \begin{lstlisting}[language=Python]
+import multiprocessing
+import time
+
+class Worker(multiprocessing.Process):
+    def __init__(self, message):
+        super().__init__()
+        self.message = message
+    def run(self):
+        time.sleep(5)
+        print('Worker:', self.message)
+
+process = Worker("Je suis un process")
+process.start() # Start the process
+process.join() # Wait for the process to finish
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Quelques modules de la Standard Library}{Threading VS Multiprocessing}
+        \begin{lstlisting}[language=Bash]
+In [2]: import multiprocessing
+   ...: import time
+   ...:
+   ...: class Worker(multiprocessing.Process):
+   ...:     def __init__(self, message):
+   ...:         super().__init__()
+   ...:         self.message = message
+   ...:     def run(self):
+   ...:         time.sleep(5)
+   ...:         print('Worker:', self.message)
+   ...:
+   ...: process = Worker("Je suis un process")
+   ...: process.start() # Start the process
+   ...: process.join() # Wait for the process to finish
+Worker: Je suis un process
+
+In [3]: process = multiprocessing.Process(target=worker, args=("Je suis un process",))
+   ...: process.start() # Start the process
+   ...: process.join() # Wait for the process to finish
+Worker: Je suis un process
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}{Quelques modules de la Standard Library}{Bibble de la concurrence}
+        Jason Brownlee a mis en ligne un site entier dédié à la concurrence en Python~: \url{https://superfastpython.com/}.
+        \bigbreak
+        Il y détaille les différents usages de la concurrence en Python et les librairies à utiliser.
+        \bigbreak
+        \centering
+        \includegraphics[width=6cm]{image/super-fast-python}
+    \end{frame}
+
+
+    \begin{frame}{Quelques modules de la Standard Library}{\href{https://docs.python.org/3/library/multiprocessing.html}{multiprocessing - Process-based parallelism}}
+        \bigbreak
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/9_multiprocessing.ipynb}~:
+        \begin{itemize}
+            \item Le nombre de coeurs du CPU
+            \item Les map et leur retour de valeurs
+            \item Les processus
+            \item Les queues pour la communication et le retour de valeurs
+        \end{itemize}
+    \end{frame}
+
+
+    \begin{frame}{Quelques modules de la Standard Library}{\href{https://docs.python.org/fr/3/library/re.html}{re - Regular expressions operations}}
+        \bigbreak
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/10_regular-expressions.ipynb}~:
+        \begin{itemize}
+            \item Chercher un motif
+            \item Les groupes
+            \item La séparation
+            \item La substitution
+            \item \lstinline{findall}
+            \item Les motifs de base
+        \end{itemize}
+        \begin{dangercolorbox}
+            Il est trop long d'apprendre l'intégralité des motifs, et probablement inutile, il faut s'aidé de ressource en ligne pour développer de meilleurs RegExp.
+        \end{dangercolorbox}
+    \end{frame}
+
+
+    \begin{frame}{Quelques modules de la Standard Library}{Installer des packages distants}
+        Où/Comment sont listées les dépendances Python~?
+        \begin{center}
+            \includegraphics[width=10cm]{image/survey_dependency_listing}
+        \end{center}
+    \end{frame}
+
+
+    \begin{frame}[fragile]{Quelques modules de la Standard Library}{Installer des packages distants}
+        Par exemple les dépendances de ce dépôt de code~:
+        \begin{lstlisting}[language=Bash]
+$ cat requirements.txt
+CheckMyTex
+jupyter
+requests # Chaque ligne est une dépendance de https://pypi.org/project/requests/
+# Depuis un repo GitHub, même privé
+git+https://github.com/<username>/<repository_name>.git@<branch_or_commit(optional)>#egg=<package_name>
+# Depuis un repo GitLab, même privé
+--index-url https://${AIRFLOW__FOO__USER}:${AIRFLOW__FOO__PASS}@my.privatepypi.com
+my-private-package==1.2.3
+$ pip install -r requirements.txt -U
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Quelques modules de la Standard Library}{Installer des packages distants}
+        Avec ou sans version de la dépendance~:
+        \begin{itemize}
+            \item \lstinline{requests}~: La dernière version
+            \item \lstinline{requests==2.26.0}~: La version 2.26.0
+            \item \lstinline{requests>=2.26.0}~: La version 2.26.0 ou supérieure
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}[fragile]{Quelques modules de la Standard Library}{Installer des packages distants}
+        Par défaut, la commande \lstinline{pip} va chercher les packages sur \url{https://pypi.org/}.
+
+        Mais on peut configurer un autre serveur par défaut, par exemple le dépôt interne de l'entreprise~:
+        \begin{lstlisting}[language=Bash]
+$ cat ~/.pip/pip.conf
+[global]
+index-url = https://my.privatepypi.com
+        \end{lstlisting}
+        \bigbreak
+        On peut également spécifier le serveur à utiliser pour une commande~:
+        \begin{lstlisting}[language=Bash]
+$ pip install -i https://my.privatepypi.com -r requirements.txt -U
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Quelques modules de la Standard Library}{Installer des packages distants}
+        Le code des packages est donc le répertoire \lstinline{site-packages} de l'interpréteur Python.
+        \begin{lstlisting}[language=Bash]
+which python
+/home/chrichri/Documents/Digicomp/Python/venv/bin/python
+$ pwd
+/home/chrichri/Documents/Digicomp/Python
+$ ll venv/lib/python3.12/site-packages/ | grep 'requests'
+drwxrwxr-x   3 chrichri chrichri    4096 oct.  12 22:23 requests/
+        \end{lstlisting}
+        Or, ce path est automatiquement ajouté au \lstinline{sys.path}, les paths connus de l'interpréteur Python où il cherche les modules~:
+        \begin{lstlisting}[language=Bash]
+In [1]: import sys
+
+In [2]: sys.path
+Out[2]:
+['/home/chrichri/Documents/Digicomp/Python/venv/bin',
+ '/usr/lib/python312.zip',
+ '/usr/lib/python3.12',
+ '/usr/lib/python3.12/lib-dynload',
+ '',
+ '/home/chrichri/Documents/Digicomp/Python/venv/lib/python3.12/site-packages']
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Quelques modules de la Standard Library}{Installer des packages distants}
+        On peut donc maintenant importer du code installé à partir d'un package distant, avec la simple instruction \lstinline{import}.
+        \begin{lstlisting}[language=Bash]
+In [3]: import requests
+
+In [4]: requests.__path__
+Out[4]: ['/home/chrichri/Documents/Digicomp/Python/venv/lib/python3.12/site-packages/requests']
+        \end{lstlisting}
+        \bigbreak
+        \begin{center}
+            \includegraphics[width=6cm]{image/std-plus-dependencies}
+        \end{center}
+    \end{frame}
+
+    \begin{frame}{Quelques modules de la Standard Library}{Installer des packages distants}
+        \begin{center}
+            \includegraphics[width=11cm]{image/pypi-requests-page}
+        \end{center}
+        \begin{dangercolorbox}
+            On pourrait tout simplement installé une dépendance avec \lstinline{pip install <le module à installé>} et l'importer dans le code.
+            Mais il est préférable de lister les dépendances dans un fichier \lstinline{requirements.txt} pour une installation reproductible sur tous les environnements.
+        \end{dangercolorbox}
+    \end{frame}
+
+
+    \section{Les fichiers}\label{sec:files}
+
+    \begin{frame}{Les fichiers}
+    \end{frame}
+
 
     \section{Licence CC}\label{sec:licence}
 
