@@ -49,4 +49,3 @@
 10. Interfaces utilisateurs
     * Introduction à la programmation d'interfaces graphiques
 11. Programmation avec l'intelligence artificielle
-
