@@ -478,7 +478,7 @@ total 8
         \bigbreak
 
         \begin{flushleft}
-            Certains plugins peuvent se connecter à des applications dédiées à l'analyse des sources comme SonarQube \emoji{flag-switzerland}, Qodana, etc.
+            Certains plugins peuvent se connecter à des applications dédiées à l'analyse des sources comme SonarQube \emoji{flag-switzerland}, Qodana, \textit{etc}.
             Ils permettent une analyse plus complète et d'enregistrer des indicateurs permettant de suivre l'évolution dans le temps de la qualité des sources du projet.
         \end{flushleft}
     \end{frame}
@@ -513,8 +513,8 @@ total 8
                 \item Jupyter, un notebook Python, très utilisé en data science.
                 Il permet de mettre en forme son développement avec du markdown pour une présentation claire et une documentation intégrée.
                 Pas de débuggeur \emoji{exploding-head}.
-                \item VS Code, un éditeur de code à compléter avec des plugins, a un débuggeur, un analyseur de code, un formateur de code, etc.
-                \item PyCharm, un IDE complet dédié au Python, avec un débuggeur, un analyseur de code, un formateur de code, etc.
+                \item VS Code, un éditeur de code à compléter avec des plugins, a un débuggeur, un analyseur de code, un formateur de code, \textit{etc}.
+                \item PyCharm, un IDE complet dédié au Python, avec un débuggeur, un analyseur de code, un formateur de code, \textit{etc}.
                 Il est celui conseillé sur \url{python.org} dans la brochure\footnote{PSF Python Brochure Vol. I final Download .pdf, \url{https://brochure.getpython.info/media/releases/psf-python-brochure-vol.-i-final-download.pdf/view}} (à lire).
             \end{itemize}
         \end{small}
@@ -850,16 +850,52 @@ $
         \end{itemize}
     \end{frame}
 
+    \begin{frame}{Programmation avancée}{Le module \href{https://docs.python.org/fr/3/library/pprint.html}{pprint}}
+        \lstinline{pprint} veut dire \textit{Pretty Print}.
+        \bigbreak
+        Il permet d'afficher des objets de manière plus lisible. Surtout les dictionnaires ou les JSON.
+
+        L'indentation et la mise en forme est configurable.
+        Tout comme \lstinline{print} il est possible de rediriger la sortie vers un fichier.
+        \begin{dangercolorbox}
+            L'argument ne s'appelle pas \lstinline{file} mais \lstinline{stream}.
+        \end{dangercolorbox}
+    \end{frame}
+
+    \begin{frame}[fragile]{Programmation avancée}{Le module \href{https://docs.python.org/fr/3/library/pprint.html}{pprint}}
+        \begin{lstlisting}[language=Bash]
+In [16]: from pprint import pprint, pp
+
+In [17]: example_dict = {"name": "Alice", "age": 30, "place": {"city": "Wonderland", "country": "UK"}, "status": "acti
+    ...: ve"}
+
+In [18]: pprint(example_dict) # Same as pp but sort_dicts is True by default
+{'age': 30,
+ 'name': 'Alice',
+ 'place': {'city': 'Wonderland', 'country': 'UK'},
+ 'status': 'active'}
+
+In [19]: pp(example_dict)
+{'name': 'Alice',
+ 'age': 30,
+ 'place': {'city': 'Wonderland', 'country': 'UK'},
+ 'status': 'active'}
+
+In [20]: print(example_dict)
+{'name': 'Alice', 'age': 30, 'place': {'city': 'Wonderland', 'country': 'UK'}, 'status': 'active'}
+        \end{lstlisting}
+    \end{frame}
+
     \subsection{CLI}\label{subsec:cli}
 
     \begin{frame}{Programmation avancée}{Les paramètres de la ligne de commande}
-        Pour passer des valuer, i.e., des arguments à un programme, il existe de multiples méthodes~:
+        Pour passer des valuer, \textit{i.e.}, des arguments à un programme, il existe de multiples méthodes~:
         \begin{itemize}
-            \item Entre autre la standard input comme vu précédemment.
+            \item Entre autre le standard input comme vu précédemment.
             \item La librairie standard \href{https://docs.python.org/3/library/argparse.html}{\lstinline{argparse}} qui permet de définir des arguments, des valeurs par défaut, des options, un \textit{help}, \textit{etc}.
             Cette librairie est très complète et à privilégier.
             \item La librairie standard \href{https://docs.python.org/3/library/sys.html\#sys.argv}{\lstinline{sys.argv}} qui permet de récupérer les arguments passés à un programme.
-            Trop bas niveau, elle demande beaucoup de travaille de développement et est à éviter.
+            Trop bas niveau, elle demande beaucoup de travail de développement et est à éviter.
         \end{itemize}
     \end{frame}
 
@@ -931,7 +967,7 @@ $ cat sum.txt
         \end{itemize}
     \end{frame}
 
-    \subsection{CLI}\label{subsec:cli}
+    \subsection{Packaging}\label{subsec:packaging}
 
     \begin{frame}{Programmation avancée}{Packaging}
         Comme vu précédemment il existe de nombreuses sources distantes de packaging.
@@ -1028,7 +1064,7 @@ std-in-sum is already installed with the same version as the provided wheel. Use
             Exercice \execcounterdispinc{}, modifier le script \lstinline{all_primes_cli.py} pour que le display du résultat dans le terminal soit colorisé.
             Pour cela, il faut utiliser un package distant comme \href{https://pypi.org/project/termcolor/}{\lstinline{termcolor}} par exemple.
 
-            Modifier la configuration pour la dépendance choisie soit ajouter automatiquement pendant l'installation.
+            Modifier la configuration pour la dépendance choisie soit ajoutée automatiquement pendant l'installation.
 
             Tester l'installation du package avec \lstinline{pip} et l'exécution de la CLI.
             \column{0.3\textwidth}
@@ -1356,6 +1392,24 @@ Out[2]:
         \end{lstlisting}
     \end{frame}
 
+    \begin{frame}{Quelques modules de la Standard Library}{Le système d'import}
+        Le système d'\lstinline{import} utilise le chemin des modules à partir d'un des paths de Python vus au slide précédent.
+
+        On peut donc importer à partir de~:
+        \begin{itemize}
+            \item \lstinline{/home/chrichri/Documents/Digicomp/Python/venv/bin}
+            \item \lstinline{/usr/lib/python312.zip}
+            \item \lstinline{/usr/lib/python3.12}
+            \item \lstinline{/usr/lib/python3.12/lib-dynload}
+            \item \lstinline{./}
+            \item \lstinline{/home/chrichri/Documents/Digicomp/Python/venv/lib/python3.12/site-packages}
+        \end{itemize}
+        \bigbreak
+        On peut également ajouter un path à la liste des paths connus de l'interpréteur Python avec la variable d'environnement \lstinline{PYTHONPATH} en faisant un \lstinline{append} de \lstinline{sys.path}.
+
+        Avec \lstinline{import} on importe tout un module mais PEP recommande de n'importer que les variables, classes, fonctions nécessaires avec la syntaxe \lstinline{from <module> import <défintion à importer>}.
+    \end{frame}
+
     \begin{frame}[fragile]{Quelques modules de la Standard Library}{Installer des packages distants}
         On peut donc maintenant importer du code installé à partir d'un package distant, avec la simple instruction \lstinline{import}.
         \begin{lstlisting}[language=Bash]
@@ -1384,7 +1438,6 @@ Out[4]: ['/home/chrichri/Documents/Digicomp/Python/venv/lib/python3.12/site-pack
     \section{Les fichiers}\label{sec:files}
 
     \begin{frame}{Les fichiers}
-        \bigbreak
         Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/11_fichiers.ipynb}~:
         Il couvre les concepts suivants~:
         \begin{itemize}
@@ -1395,6 +1448,257 @@ Out[4]: ['/home/chrichri/Documents/Digicomp/Python/venv/lib/python3.12/site-pack
             \item La lecture de fichiers CSV
             \item L'écriture de fichiers CSV
         \end{itemize}
+    \end{frame}
+
+
+    \section{L'internet}\label{sec:internet}
+
+    \begin{frame}{L'internet}{Les différentes parties prenantes}
+        Les parties prenantes du web (serveur - navigateur)~:
+        \bigbreak
+        \centering
+        \includegraphics[width=11cm]{image/web-stakeholders}
+    \end{frame}
+
+    \begin{frame}{L'internet}{Les 2 librairies essentielles}
+        Nous allons découvrir 2 librairies~:
+        \begin{itemize}
+            \item \href{https://requests.readthedocs.io/en/latest/}{Requests: HTTP for Humans™}.
+            Une abstraction du HTTP, très vraisemblablement la librairie la plus utilisée pour les requêtes HTTP en Python.
+            Elle permet de créer rapidement un client pour une API web.
+            \item \href{https://www.crummy.com/software/BeautifulSoup/bs4/doc/}{Beautiful Soup} un parseur HTML et XML.
+            Il permet de naviguer dans un document HTML ou XML, extraire des données, modifier le document, \textit{etc}.
+            Elle est la base du \textit{web scrapping}, la collecte de données sur le web.
+        \end{itemize}
+        \bigbreak
+        Les deux librairies sont disponibles sur \url{https://pypi.org/}, \textit{i.e.}, ce sont des packages pip.
+    \end{frame}
+
+    \begin{frame}{L'internet}{Les 2 librairies essentielles}
+        Ouvrir dans PyCharm les notebook téléchargés aux adresses suivantes~:
+        \begin{itemize}
+            \item \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/12_bs4_requests.ipynb}
+            \item \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/13_bs4_requests.ipynb}
+        \end{itemize}
+        Ils mettent en avant l'usage de request pour récupérer des données sur le web et de BeautifulSoup pour parser les sites et extraire les données.
+        \bigbreak
+        Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/14_requests_client.ipynb}, il illustre l'utilisation de \lstinline{requests} pour la création de client Python d'API web.
+    \end{frame}
+
+
+    \section{L'OOP}\label{sec:oop}
+
+    \begin{frame}{OOP}{Définition d'une classe}
+        La programmation orientée objet (OOP) est un paradigme de programmation qui utilise des objets et des classes.
+
+        Python est un langage orienté objet, tout est un objet~!
+        On peut déclarer une nouvelle classe avec l'instruction \lstinline{class}.
+        \bigbreak
+        Un objet est une instance d'une classe dont le constructor a été appelé.
+        Le constructor est une méthode spéciale \lstinline{__init__} qui initialise les attributs de l'objet.
+        On peut également y initialiser les classes parentes en cas d'héritage avec leur méthode \lstinline{__init__} ou \lstinline{super()}.
+        \bigbreak
+        Les attribues initialisés dans le constructor sont des attributs d'instance, ils sont propres à chaque instance de la classe et sont accessibles dans toutes les méthodes.
+        C'est l'encapsulation, nombreux sont ceux qui ont considéré cette facilité d'écriture comme révolutionnaire lors de son apparition dans les années 90.
+    \end{frame}
+
+    \begin{frame}{OOP}{Héritage ou composition}
+
+        \centering
+        \includegraphics[width=11cm]{image/inheritance-or-composition}
+    \end{frame}
+
+    \begin{frame}{OOP}{Exercice}
+        Exercice \execcounterdispinc{}, dans un module appelé \lstinline{person.py}, développer une classe \lstinline{Person} avec les attributs \lstinline{first_name}, \lstinline{last_name}, \lstinline{email} et \lstinline{phone}.
+        \bigbreak
+        Dans un module appelé \lstinline{employee.py}, développer la classe \lstinline{Employee} qui hérite de la classe \lstinline{Person} et a en plus les attributs \lstinline{employee_id} et \lstinline{department}.
+    \end{frame}
+
+
+    \section{Les bases de données}\label{sec:database}
+
+    \begin{frame}{Les bases de données}{Dans la standard library}
+        Les seuls clients d'API de base de données de la standard library sont~:
+        \begin{itemize}
+            \item \href{https://docs.python.org/3/library/dbm.html}{dbm — Interfaces to Unix “databases”}, une base de données de type clé-valeur.
+            \item \href{https://docs.python.org/3/library/sqlite3.html}{sqlite3 — DB-API 2.0 interface for SQLite databases} pour les bases de données SQLite, donc relationnelle.
+        \end{itemize}
+        \bigbreak
+        Il existe des clients pour quasi toutes les bases de données, relationnelles, noSQL orientées documents, \textit{etc}.
+        Il est possible d'utiliser des ORM comme SQLAlchemy pour se connecter à d'autres bases de données.
+        \bigbreak
+        Nous allons nous concentrer sur SQLite, une base de données relationnelle légère, stockée dans un fichier.
+        Elle est semblable à l'API des autres bases relationnelles.
+    \end{frame}
+
+    \begin{frame}{Les bases de données}{SQLite3}
+        \begin{dangercolorbox}
+            Le code en exemple et à développer dans l'exercice n'est pas dans un notebook mais dans un module normal.
+            Dans le module \lstinline{customer_database.py}, en effet le code d'un notebook ne peut pas être importé dans un autre notebook ou script.
+            Or nous réutiliseront le code dans le prochain sur le GUI en Tk.
+        \end{dangercolorbox}
+        \bigbreak
+        Pour exécuter une requête la séquence est la suivante~:
+        \begin{enumerate}
+            \item Créer une connexion à la base de données.
+            \item Créer un curseur pour exécuter des requêtes.
+            \item Exécuter la requête.
+            \item Rollback en cas d'erreur, sinon commit
+            \item Fermer la connexion.
+        \end{enumerate}
+    \end{frame}
+
+    \begin{frame}[fragile]{Les bases de données}{SQLite3}
+        Cette séquence est codée dans un contexte manager dans le module \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/14_requests_client.ipynb}~:
+        \begin{lstlisting}[language=Python,basicstyle=\tiny\ttfamily]
+import sqlite3
+from contextlib import contextmanager
+@contextmanager
+def db_ops(db_name):
+    """
+    Context manager to handle database operations
+
+       :param db_name: String, the path to the database on the FS
+       :yield: Cursor object
+    """
+    conn = sqlite3.connect(db_name)
+    try:
+        cur = conn.cursor()
+        yield cur
+    except Exception as e:
+        # do something with exception
+        conn.rollback()
+        raise e
+    else:
+        conn.commit()
+    finally:
+        conn.close()
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]{Les bases de données}{SQLite3}
+        Il ne reste plus qu'à définir des méthodes en Python et leur équivalent en SQL, qui est exécuté dans le contexte précédant~:
+        \begin{lstlisting}[language=Python,basicstyle=\tiny\ttfamily]
+    def create_table(self) -> None:
+        with db_ops(self.path) as cur:
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS customer (
+                    id INT PRIMARY KEY NOT NULL,
+                    email TEXT NOT NULL
+                )
+                """
+            )
+
+    def insert(self, customer_id: int, email: str) -> None:
+        with db_ops(self.path) as cur:
+            cur.execute(
+                """
+                INSERT INTO customer (
+                    id,
+                    email
+                ) VALUES (
+                    ?, ?
+                )""",
+                (customer_id, email),
+            )
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}{Les bases de données}{SQLite3}
+        Exercice \execcounterdispinc{}, compléter le module \lstinline{customer_database.py} avec les méthodes suivantes{}~:
+        \begin{enumerate}
+            \item \lstinline{select_all}~: Sélectionner tous les clients de la base de données.
+            \item \lstinline{select}~: Sélectionner un client par son \lstinline{id}.
+            \item \lstinline{update}~: Mettre à jour un client par son \lstinline{id}.
+            \item \lstinline{delete}~: Supprimer un client par son \lstinline{id}.
+        \end{enumerate}
+        \bigbreak
+        \centering
+        \includegraphics[width=cm]{image/python-in-dc}
+    \end{frame}
+
+
+    \section{GUI}\label{sec:ui}
+
+    \begin{frame}{GUI}
+        Dans la standard library, il existe un module pour créer des interfaces graphiques (GUI), \lstinline{tkinter}.
+        \bigbreak
+        Elle peut fonctionner sur toutes les plateformes qui supportent \href{https://www.tcl.tk/}{Tcl/Tk}~:
+        \begin{itemize}
+            \item Windows
+            \item MacOS
+            \item Linux
+        \end{itemize}
+        Son API Python est décrite dans la documentation \url{https://docs.python.org/3/library/tk.html}.
+    \end{frame}
+
+    \begin{frame}{GUI}
+        Le module \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/customer_gui.py} est une UI qui utilise les méthodes du module \lstinline{customer_database.py} précédemment développées.
+        Mais il n'est pas complet.
+        \bigbreak
+        Exercice \execcounterdispinc{}, afficher dans l'UI toutes les entrées de la base dans une liste en appelant la méthode \lstinline{select_all} du module \lstinline{customer_database.py}.
+        Vous pouvez agrandir la fenêtre existante pour la liste ou créer un bouton d'appel de la liste qui ouvre une fenêtre dédiée à la liste.
+    \end{frame}
+
+
+    \section{Machine Learning}\label{sec:ml}
+
+    \begin{frame}{Machine Learning}{Les librairies}
+        Python est le langage de la Data Science et du Machine Learning.
+        Il surpasse depuis des années l'écosystème \href{https://posit.co/download/rstudio-desktop/}{R}.
+        \bigbreak
+        Mais la Data Science nécessite de nombreuses librairies, les plus connues sont~:
+        \begin{itemize}
+            \item \href{https://numpy.org/}{NumPy} pour les calculs scientifiques
+            \item \href{https://pandas.pydata.org/}{Pandas} pour la manipulation de données
+            \item \href{https://matplotlib.org/}{Matplotlib} pour la visualisation de données
+            \item \href{https://plotly.com/}{Plotly} pour la visualisation de données
+            \item \href{https://scikit-learn.org/stable/}{Scikit-learn} pour le Machine Learning
+            \item \href{https://www.tensorflow.org/}{TensorFlow} pour le Deep Learning
+            \item \href{https://pytorch.org/}{PyTorch} pour le Deep Learning
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Machine Learning}{Régression linéaire avec Scikit-learn}
+        Télécharger et ouvrir le notebook \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/15_simple_linear_regression}.
+        Ce dernier illustre un exemple de régression linéaire simple avec Scikit-learn.
+        \bigbreak
+        \begin{columns}
+            \column{0.5\textwidth}
+            La regression linéaire est un des plus simples algorithmes de Machine Learning.
+            Il permet de prédire une variable continue à partir d'une autre variable continue en trouvant la meilleure droite qui les relie.
+            Celle qui a le R carré le plus élevé, le plus proche de 1.
+            \column{0.5\textwidth}
+            \centering
+            \includegraphics[width=6cm]{image/linear-regression}
+        \end{columns}
+        \bigbreak
+        Le salaire est la variable \textit{target} qui pourra être prédite à partir de l'expérience la variable année d'expérience, la \textit{feature}.
+    \end{frame}
+
+    \begin{frame}{Machine Learning}{Régression linéaire avec Scikit-learn}
+        Avec la méthode \lstinline{train_test_split} de Scikit-learn on peut diviser les données en deux jeux~:
+        \begin{itemize}
+            \item Un jeu d'entraînement pour entraîner le modèle et trouver la meilleure regression linéaire
+            \item Un jeu de test pour tester le modèle et calculer le R carré et d'autres métriques, sur un jeu de données inconnues.
+        \end{itemize}
+        \begin{dangercolorbox}
+            Le Machine Learning n'est qu'un domaine de la Data Science.
+            Il a besoin des mêmes outils pour le pré-traitement des données (A.K.A \textit{data wrangling}), la visualisation, la manipulation, \textit{etc}.
+            Pour ce faire il faut maîtriser les librairies \lstinline{pandas}, \lstinline{plotly}.
+            \lstinline{pandas} est une librairie très puissante pour la manipulation de données, elle est très utilisée en Data Science.
+            Elle n'est pas compliquée mais mériterait une journée de formation à elle seule.
+            Regardez les notebook \url{https://github.com/jupyter-naas/awesome-notebooks/tree/master/Pandas} pour vous autoformer.
+        \end{dangercolorbox}
+    \end{frame}
+
+    \begin{frame}{Machine Learning}{Régression linéaire avec Scikit-learn}
+        Exercice \execcounterdispinc{}, créer un notebook et étudier le dataset \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/advertising.csv}.
+        Il contient les données de ventes en fonction de la publicité TV, radio et journaux.
+        \bigbreak
+        La variable \textit{target} est les ventes, les \textit{features} sont les budgets publicitaires.
+        Trouver quelle est la meilleure \textit{feature} de prédiction des ventes, celle qui a le R carré le plus élevé.
     \end{frame}
 
 

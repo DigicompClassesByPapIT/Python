@@ -1,3 +1,12 @@
+# Required to check Beamer code syntax
 CheckMyTex
+# Required for Notebooks, it will install IPython and Jupyter
 jupyter
+# Required for internet
 requests
+bs4
+# Required for ML
+pandas
+numpy
+plotly
+scikit-learn
