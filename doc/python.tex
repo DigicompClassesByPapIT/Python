@@ -43,7 +43,7 @@
         \begin{multicols}{3}
             \begin{tiny}
                 \begin{enumerate}
-                    \item Qu'est-ce que Python ?
+                    \item Qu'est-ce que Python~?
                     \item Premiers pas
                     \begin{itemize}
                         \begin{tiny}
@@ -192,8 +192,8 @@
     \begin{frame}{Présentation de Python}{Comment exécuter le code Python~?}
         Une fois le programme écrit, il faut l'exécuter.
 
-        Les environnements d'exécution possible sont innombrables~!
-        Il en existe des plus spécifiques à une application comme \href{https://www.anaconda.com/}{Anaconda} pour le data science, ou à une plateforme comme \href{https://micropython.org/}{MicroPython}, sinon un plus généraliste comme l'interpréteur \href{https://github.com/python/cpython}{CPython}.
+        Les environnements d'exécution possibles sont innombrables~!
+        Il en existe des plus spécifiques à une application comme \href{https://www.anaconda.com/}{Anaconda} pour la data science, ou à une plateforme comme \href{https://micropython.org/}{MicroPython}, sinon un plus généraliste comme l'interpréteur \href{https://github.com/python/cpython}{CPython}.
         \bigbreak
         Cette exécution peut résulter de~:
         \begin{itemize}
@@ -210,7 +210,7 @@
             \begin{columns}
                 \column{0.7\textwidth}
                 \begin{itemize}
-                    \item \href{https://github.com/python/cpython}{CPython}~: L'interpréteur de référence, écrit en C, il est le plus
+                    \item \href{https://github.com/python/cpython}{CPython}~: L'interpréteur de référence, écrit en C, il est le plus courant.
                     \item \href{https://pypy.org/}{PyPy}~: Un interpréteur Python écrit en Python.
                     \item \href{https://cython.org/}{Cython}~: Un transpileur Python vers C, pour accélérer les parties critiques.
                     \item \href{https://www.graalvm.org/python/}{GraalVM}~: Un interpréteur Python sur une (J)VM polyglotte, avec un compilateur JIT.
@@ -241,7 +241,7 @@
             \column{0.8\textwidth}
             Sous licence BSD, l'interpréteur CPython est open source.
 
-            Elle permet d'utiliser cette technologie dans toutes les applications, même commerciales sans restriction.
+            Elle permet d'utiliser cette technologie dans toutes les applications, même commerciales, sans restriction.
             \bigbreak
             La majeure partie de l'écosystème est aussi OS.
             \column{0.2\textwidth}
@@ -284,7 +284,7 @@
                 \centering
                 \includegraphics[width=5cm]{image/sun-java-logo}
                 \flushleft
-                Java en 1995, par Sun Microsystems, fait pour \textbf{vendre les PC et serveurs} de la marque.
+                Java en 1995, par Sun Microsystems, est fait pour \textbf{vendre les PC et serveurs} de la marque.
                 \bigbreak
                 Son atout~: \textquote{Its syntax is similar to C and C++, but it omits many of the features that make C and C++ complex, confusing, and unsafe.}\footnotemark
             \end{columns}
@@ -297,9 +297,9 @@
 
     \begin{frame}{Bonnes pratiques, l'approche de Python}
         \begin{itemize}
-            \item Python a une syntaxe éloignée des langages de son temps qui sont toutes déclinées de celle du C. Les syntaxes de C, C++, C\#, Java et même JavaScript
-            \item Le pari d'une nouvelle syntaxe était risqué, mais G. Van Rossum souhaite une meilleure lisibilité
-            \item \textquote{code is read much more often than it is written. The guidelines provided here are intended to improve the readability of code and make it consistent across the wide spectrum of Python code. As PEP 20 says, \textbf{Readability counts}}\footnote{Guido Van Rossum, \url{https://peps.python.org/pep-0008/}}
+            \item Python a une syntaxe éloignée des langages de son temps qui sont toutes déclinées de celle du C. Les syntaxes de C, C++, C\#, Java et même JavaScript.
+            \item Le pari d'une nouvelle syntaxe était risqué, mais G. Van Rossum souhaite une meilleure lisibilité.
+            \item \textquote{code is read much more often than it is written. The guidelines provided here are intended to improve the readability of code and make it consistent across the wide spectrum of Python code. As PEP 20 says, \textbf{Readability counts}}\footnote{Guido Van Rossum, \url{https://peps.python.org/pep-0008/}}.
         \end{itemize}
     \end{frame}
 
@@ -343,16 +343,14 @@ Namespaces are one honking great idea -- let's do more of those!
 
     \end{frame}
 
-    \begin{frame}[fragile]
-        \transdissolve
-        \frametitle{Bonnes pratiques, Python et PEP}
+    \begin{frame}[fragile]{Bonnes pratiques, Python et PEP}
         \begin{columns}
             \column{0.5\textwidth}
             \begin{itemize}
                 \item PEP est la convention de codage recommandée par Python, comme PEP8, le Style Guide for Python Code, à lire SVP
-                \item Défini les espaces utiles à la lisibilité et les inutiles
+                \item Définit les espaces utiles à la lisibilité et les inutiles
                 \item Snake\_case pour les variables
-                \item Défini les casses et la déclaration~:
+                \item Définit les casses et la déclaration~:
                 \begin{itemize}
                     \item Attribut et méthode privé/publique~:
                 \end{itemize}
@@ -551,7 +549,7 @@ total 8
         \begin{itemize}
             \item \lstinline{pip install ipython}
             \item \lstinline{pip install jupyter}, mais cette commande est à privilégier dans un virtual environnement.
-            Le concept de virtual environnement sera développé dans les chapitres suivants.
+            Un virtual environnement est un environnement Python isolé, qui permet de ne pas polluer l'environnement global de Python.
         \end{itemize}
     \end{frame}
 
@@ -559,7 +557,7 @@ total 8
     \section{Les mots clé}\label{sec:keyword}
 
     \begin{frame}[fragile]{Les mots clé Python\footnote{Python Keywords, \url{https://docs.python.org/3/reference/lexical_analysis.html\#keywords}}}
-        Python a ces mots clé~:
+        Python a ces mots clés~:
         \begin{verbatim}
 False      await      else       import     pass
 None       break      except     in         raise
@@ -569,7 +567,7 @@ as         def        from       nonlocal   while
 assert     del        global     not        with
 async      elif       if         or         yield
         \end{verbatim}
-        Nous les connaîtrons tous (ou quasi) à la fin de cette session~!
+        Nous les connaîtrons tous (ou quasi) à la fin de cette formation~!
     \end{frame}
 
 
@@ -634,7 +632,7 @@ async      elif       if         or         yield
 
     \begin{frame}{Bases de la programmation}{Les erreurs et exceptions}
         Un programme ne doit pas directement crasher à cause d'une exception levée.
-        Les librairies et API doivent lever des exceptions pour signaler des erreurs au couches supérieur du programme que le GUI ou la CLI.
+        Les librairies et API doivent lever des exceptions pour signaler des erreurs aux couches supérieurs du programme que le GUI ou la CLI.
         \bigbreak
         \centering
         \includegraphics[width=11cm]{image/exception}
@@ -646,7 +644,7 @@ async      elif       if         or         yield
         Ce dernier expose des concepts suivants~:
         \begin{itemize}
             \item Déclarations d'une fonction
-            \item Retour de valeurs
+            \item Retour de valeur(s)
             \item Fonction lambda
             \item Les \textit{partials}
             \item Décorateurs
@@ -741,7 +739,7 @@ async      elif       if         or         yield
     \begin{frame}[fragile]{Programmation avancée}{Gestion des input et output en Python}
         Ouvrir dans PyCharm le script téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/std_in_sum.py}.
         \begin{dangercolorbox}
-            On travaille avec un script et non plus un notebook, car ces derniers ne prête pas à la gestion des flux standards et d'un CLI
+            On travaille avec un script et non plus un notebook, car ces derniers ne se prête pas à la gestion des flux standards et d'un CLI
         \end{dangercolorbox}
         Ce dernier met en avant l'usage de l'entrée standard rendu possible grâce au module \lstinline{sys} de la librairie standard.
         \begin{lstlisting}[language=bash]
@@ -756,7 +754,7 @@ $ python3 std_in_sum.py <<EOF
     \end{frame}
 
     \begin{frame}[fragile]{Programmation avancée}{Gestion des input et output en Python}
-        La sortie standard et l'erreur standard sont gérée pas la fonction built-in \lstinline{print} à laquelle on peut passer un argument \lstinline{file} un objet fichier vers lequel la sortie sera redirigée.
+        La sortie standard et l'erreur standard sont gérées par la fonction built-in \lstinline{print} à laquelle on peut passer un argument \lstinline{file} un objet fichier vers lequel la sortie sera redirigée.
         \begin{lstlisting}[language=Python,basicstyle=\tiny\ttfamily]
 from sys import stdin, stdout, stderr
 
@@ -845,12 +843,12 @@ $
         \begin{itemize}
             \item Créer un script Python nommé \lstinline{all_primes.py}.
             \item Il ne prend aucune donnée en entrée.
-            \item Il affiche un nombre premier qui commence par les chiffres tapés sur la pavé numérique.
+            \item Il affiche un nombre premier qui commence par les chiffres tapés sur le pavé numérique.
             \item Tester le script avec des valeurs correctes et aberrantes.
         \end{itemize}
     \end{frame}
 
-    \begin{frame}{Programmation avancée}{Le module \href{https://docs.python.org/fr/3/library/pprint.html}{pprint}}
+    \begin{frame}{Programmation avancée}{Le module \lstinline{pprint}}
         \lstinline{pprint} veut dire \textit{Pretty Print}.
         \bigbreak
         Il permet d'afficher des objets de manière plus lisible. Surtout les dictionnaires ou les JSON.
@@ -860,9 +858,11 @@ $
         \begin{dangercolorbox}
             L'argument ne s'appelle pas \lstinline{file} mais \lstinline{stream}.
         \end{dangercolorbox}
+        \bigbreak
+        Plus de détails dans sa documentation officielle \url{https://docs.python.org/fr/3/library/pprint.html}.
     \end{frame}
 
-    \begin{frame}[fragile]{Programmation avancée}{Le module \href{https://docs.python.org/fr/3/library/pprint.html}{pprint}}
+    \begin{frame}[fragile]{Programmation avancée}{Le module \lstinline{pprint}}
         \begin{lstlisting}[language=Bash]
 In [16]: from pprint import pprint, pp
 
@@ -889,7 +889,7 @@ In [20]: print(example_dict)
     \subsection{CLI}\label{subsec:cli}
 
     \begin{frame}{Programmation avancée}{Les paramètres de la ligne de commande}
-        Pour passer des valuer, \textit{i.e.}, des arguments à un programme, il existe de multiples méthodes~:
+        Pour passer des valeurs, \textit{i.e.}, des arguments à un programme, il existe de multiples méthodes~:
         \begin{itemize}
             \item Entre autre le standard input comme vu précédemment.
             \item La librairie standard \href{https://docs.python.org/3/library/argparse.html}{\lstinline{argparse}} qui permet de définir des arguments, des valeurs par défaut, des options, un \textit{help}, \textit{etc}.
@@ -902,8 +902,8 @@ In [20]: print(example_dict)
     \begin{frame}[fragile]{Programmation avancée}{Les paramètres de la ligne de commande}
         \begin{footnotesize}
             Ouvrir dans PyCharm le script téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/std_in_sum_cli.py}.
-            Il est identique à \lstinline{std_in_sum.py} sauf qu'on utilise \lstinline{argparse} et on peut passer entré un fichier ou la standard in.
-            Il est également possible grâce à cette librairie de spécifié un fichier de sortie ou la standard out par défaut.
+            Il est identique à \lstinline{std_in_sum.py} sauf qu'on utilise \lstinline{argparse} et on peut passer en entrée un fichier ou la standard in.
+            Il est également possible grâce à cette librairie de spécifier un fichier de sortie ou la standard out par défaut.
         \end{footnotesize}
         \begin{lstlisting}[language=Python,basicstyle=\tiny\ttfamily]
     parser = argparse.ArgumentParser(
@@ -957,11 +957,11 @@ $ cat sum.txt
         Exercice \execcounterdispinc{}, développer le script Python suivant~:
         \begin{itemize}
             \item Créer un script Python nommé \lstinline{all_primes_cli.py}.
-            \item Il a les mêmes éxigences que \lstinline{all_primes.py}.
+            \item Il a les mêmes exigences que \lstinline{all_primes.py}.
             \item Mais en plus doit pouvoir~:
             \begin{itemize}
                 \item Prendre un argument \lstinline{--start} pour spécifier le début de la recherche.
-                \item Prendre un argument \lstinline{--out} pour spécifier un fichier de standard, par défaut c'est standard output.
+                \item Prendre un argument \lstinline{--out} pour spécifier un fichier de standard, par défaut c'est la standard output.
             \end{itemize}
             \item Tester le script avec des valeurs correctes et aberrantes.
         \end{itemize}
@@ -1064,7 +1064,7 @@ std-in-sum is already installed with the same version as the provided wheel. Use
             Exercice \execcounterdispinc{}, modifier le script \lstinline{all_primes_cli.py} pour que le display du résultat dans le terminal soit colorisé.
             Pour cela, il faut utiliser un package distant comme \href{https://pypi.org/project/termcolor/}{\lstinline{termcolor}} par exemple.
 
-            Modifier la configuration pour la dépendance choisie soit ajoutée automatiquement pendant l'installation.
+            Modifier la configuration pour que la dépendance choisie soit ajoutée automatiquement pendant l'installation.
 
             Tester l'installation du package avec \lstinline{pip} et l'exécution de la CLI.
             \column{0.3\textwidth}
@@ -1079,7 +1079,7 @@ std-in-sum is already installed with the same version as the provided wheel. Use
     \begin{frame}{Quelques modules de la Standard Library}{La Standard Library}
         \begin{tiny}
             La standard library Python couvre (quasi) tous les besoins d'un développeur.
-            Des librairies distantes dédiées peuvent être plus performance ou plus faciles à prendre en main, d'où l'existence des frameworks web.
+            Des librairies distantes dédiées peuvent être plus performantes ou plus faciles à prendre en main, d'où l'existence des frameworks web.
             Mais si on s'en donne les moyens on peut tout faire avec la standard library.
             \bigbreak
             Selon son site elle couvre~:
@@ -1139,7 +1139,7 @@ std-in-sum is already installed with the same version as the provided wheel. Use
         \bigbreak
         Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/8_datetime.ipynb}.
 
-        Il détail~:
+        Il détaille~:
         \begin{itemize}
             \item L'objet \lstinline{datetime}
             \item La création d'un objet \lstinline{datetime} à partir d'une chaîne de caractères
@@ -1157,8 +1157,6 @@ std-in-sum is already installed with the same version as the provided wheel. Use
             \item \lstinline{n_day.py}~: Pour un peu plus de défi, écrivez la version plus générale qui calcule le jour où une personne est $n$ fois plus âgée que l'autre.
         \end{enumerate}
     \end{frame}
-
-    \subsection{Quelques modules de la Standard Library}\label{subsec:std-modules}
 
     \begin{frame}{Quelques modules de la Standard Library}{La concurrence}
         Il existe plusieurs libraires permettant une exécution concurrente du code dans la standard library Python.
@@ -1179,7 +1177,7 @@ std-in-sum is already installed with the same version as the provided wheel. Use
 
     \begin{frame}{Quelques modules de la Standard Library}{La concurrence}
         Python n'est pas réputé pour sa rapidité.
-        En réalité, c'est son implémentation CPython qui ne l'ai pas.
+        En réalité, c'est son implémentation CPython qui ne l'est pas.
         \bigbreak
         Pourquoi~?
         \pause
@@ -1196,11 +1194,11 @@ std-in-sum is already installed with the same version as the provided wheel. Use
 
     \begin{frame}{Quelques modules de la Standard Library}{La concurrence}
         Chaque librairie a ses avantages et inconvénients.
-        La principale différence est que l'exécution est soit dans le même process, soit exécuté dans un nouveau process.
+        La principale différence est que l'exécution est soit dans le même process, soit dans un nouveau process.
         \bigbreak
-        Si c'est dans le même process on parle de threading, dans un autre process on parle de multiprocessing.
+        Si c'est dans le même process on parle de threading, dans un autre process, on parle de multiprocessing.
         \bigbreak
-        Si on peut exécuter du code dans plusieurs, le GIL devient moins limitant en terme de performance~!
+        Si on peut exécuter du code dans plusieurs process, le GIL devient moins limitant en termes de performance~!
         \begin{dangercolorbox}
             Attention on parle parfois de thread pour les coeurs des CPU. Mais si on en utilise un de plus c'est du multiprocessing.
             Il faut différencier thread physique et thread logiciel.
@@ -1293,8 +1291,8 @@ Worker: Je suis un process
         \bigbreak
         Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/9_multiprocessing.ipynb}~:
         \begin{itemize}
-            \item Le nombre de coeurs du CPU
-            \item Les map et leur retour de valeurs
+            \item Le nombre de cœurs du CPU
+            \item Les \lstinline{map} et leur retour de valeurs
             \item Les processus
             \item Les queues pour la communication et le retour de valeurs
         \end{itemize}
@@ -1313,7 +1311,7 @@ Worker: Je suis un process
             \item Les motifs de base
         \end{itemize}
         \begin{dangercolorbox}
-            Il est trop long d'apprendre l'intégralité des motifs, et probablement inutile, il faut s'aidé de ressource en ligne pour développer de meilleurs RegExp.
+            Il est trop long d'apprendre l'intégralité des motifs, et probablement inutile, il faut s'aider de ressources en ligne pour développer de meilleures RegExp.
         \end{dangercolorbox}
     \end{frame}
 
@@ -1429,7 +1427,7 @@ Out[4]: ['/home/chrichri/Documents/Digicomp/Python/venv/lib/python3.12/site-pack
             \includegraphics[width=11cm]{image/pypi-requests-page}
         \end{center}
         \begin{dangercolorbox}
-            On pourrait tout simplement installé une dépendance avec \lstinline{pip install <le module à installé>} et l'importer dans le code.
+            On pourrait tout simplement installer une dépendance avec \lstinline{pip install <le module à installé>} et l'importer dans le code.
             Mais il est préférable de lister les dépendances dans un fichier \lstinline{requirements.txt} pour une installation reproductible sur tous les environnements.
         \end{dangercolorbox}
     \end{frame}
@@ -1439,6 +1437,7 @@ Out[4]: ['/home/chrichri/Documents/Digicomp/Python/venv/lib/python3.12/site-pack
 
     \begin{frame}{Les fichiers}
         Ouvrir dans PyCharm le notebook téléchargé à l'adresse \url{https://github.com/DigicompClassesByPapIT/Python/blob/main/11_fichiers.ipynb}~:
+        \bigbreak
         Il couvre les concepts suivants~:
         \begin{itemize}
             \item Les modes d'ouverture
@@ -1495,7 +1494,7 @@ Out[4]: ['/home/chrichri/Documents/Digicomp/Python/venv/lib/python3.12/site-pack
         On peut déclarer une nouvelle classe avec l'instruction \lstinline{class}.
         \bigbreak
         Un objet est une instance d'une classe dont le constructor a été appelé.
-        Le constructor est une méthode spéciale \lstinline{__init__} qui initialise les attributs de l'objet.
+        Le constructor est la méthode spéciale \lstinline{__init__} dans laquelle on initialise les attributs de l'objet.
         On peut également y initialiser les classes parentes en cas d'héritage avec leur méthode \lstinline{__init__} ou \lstinline{super()}.
         \bigbreak
         Les attribues initialisés dans le constructor sont des attributs d'instance, ils sont propres à chaque instance de la classe et sont accessibles dans toutes les méthodes.
@@ -1520,11 +1519,11 @@ Out[4]: ['/home/chrichri/Documents/Digicomp/Python/venv/lib/python3.12/site-pack
     \begin{frame}{Les bases de données}{Dans la standard library}
         Les seuls clients d'API de base de données de la standard library sont~:
         \begin{itemize}
-            \item \href{https://docs.python.org/3/library/dbm.html}{dbm — Interfaces to Unix “databases”}, une base de données de type clé-valeur.
-            \item \href{https://docs.python.org/3/library/sqlite3.html}{sqlite3 — DB-API 2.0 interface for SQLite databases} pour les bases de données SQLite, donc relationnelle.
+            \item \href{https://docs.python.org/3/library/dbm.html}{\lstinline{dbm} — Interfaces to Unix “databases”}, une base de données de type clé-valeur.
+            \item \href{https://docs.python.org/3/library/sqlite3.html}{\lstinline{sqlite3} — DB-API 2.0 interface for SQLite databases} pour les bases de données SQLite, donc relationnelle.
         \end{itemize}
         \bigbreak
-        Il existe des clients pour quasi toutes les bases de données, relationnelles, noSQL orientées documents, \textit{etc}.
+        Il existe en ligne des clients pour quasi toutes les bases de données, relationnelles, noSQL orientées documents, \textit{etc}.
         Il est possible d'utiliser des ORM comme SQLAlchemy pour se connecter à d'autres bases de données.
         \bigbreak
         Nous allons nous concentrer sur SQLite, une base de données relationnelle légère, stockée dans un fichier.
@@ -1535,7 +1534,7 @@ Out[4]: ['/home/chrichri/Documents/Digicomp/Python/venv/lib/python3.12/site-pack
         \begin{dangercolorbox}
             Le code en exemple et à développer dans l'exercice n'est pas dans un notebook mais dans un module normal.
             Dans le module \lstinline{customer_database.py}, en effet le code d'un notebook ne peut pas être importé dans un autre notebook ou script.
-            Or nous réutiliseront le code dans le prochain sur le GUI en Tk.
+            Or nous réutiliserons le code dans le prochain sur le GUI en Tk.
         \end{dangercolorbox}
         \bigbreak
         Pour exécuter une requête la séquence est la suivante~:
@@ -1607,15 +1606,15 @@ def db_ops(db_name):
 
     \begin{frame}{Les bases de données}{SQLite3}
         Exercice \execcounterdispinc{}, compléter le module \lstinline{customer_database.py} avec les méthodes suivantes{}~:
-        \begin{enumerate}
+        \begin{itemize}
             \item \lstinline{select_all}~: Sélectionner tous les clients de la base de données.
             \item \lstinline{select}~: Sélectionner un client par son \lstinline{id}.
             \item \lstinline{update}~: Mettre à jour un client par son \lstinline{id}.
             \item \lstinline{delete}~: Supprimer un client par son \lstinline{id}.
-        \end{enumerate}
+        \end{itemize}
         \bigbreak
         \centering
-        \includegraphics[width=cm]{image/python-in-dc}
+        \includegraphics[width=5cm]{image/python-in-dc}
     \end{frame}
 
 
@@ -1638,7 +1637,7 @@ def db_ops(db_name):
         Mais il n'est pas complet.
         \bigbreak
         Exercice \execcounterdispinc{}, afficher dans l'UI toutes les entrées de la base dans une liste en appelant la méthode \lstinline{select_all} du module \lstinline{customer_database.py}.
-        Vous pouvez agrandir la fenêtre existante pour la liste ou créer un bouton d'appel de la liste qui ouvre une fenêtre dédiée à la liste.
+        Vous pouvez agrandir la fenêtre existante pour la liste ou créer un bouton d'appel de la liste qui ouvre une fenêtre dédiée à cette dernière.
     \end{frame}
 
 
